@@ -61,6 +61,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				status: {
+					up: 'hsl(var(--status-up))',
+					'up-foreground': 'hsl(var(--status-up-foreground))',
+					down: 'hsl(var(--status-down))',
+					'down-foreground': 'hsl(var(--status-down-foreground))',
+					warning: 'hsl(var(--status-warning))',
+					'warning-foreground': 'hsl(var(--status-warning-foreground))',
+					unknown: 'hsl(var(--status-unknown))',
+					'unknown-foreground': 'hsl(var(--status-unknown-foreground))'
+				},
+				chart: {
+					success: 'hsl(var(--chart-success))',
+					error: 'hsl(var(--chart-error))',
+					warning: 'hsl(var(--chart-warning))',
+					info: 'hsl(var(--chart-info))'
 				}
 			},
 			borderRadius: {

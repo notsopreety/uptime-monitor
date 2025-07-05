@@ -9,7 +9,77 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      uptime_checks: {
+        Row: {
+          checked_at: string | null
+          error_message: string | null
+          id: string
+          response_time: number | null
+          status: string
+          status_code: number | null
+          website_id: string
+        }
+        Insert: {
+          checked_at?: string | null
+          error_message?: string | null
+          id?: string
+          response_time?: number | null
+          status: string
+          status_code?: number | null
+          website_id: string
+        }
+        Update: {
+          checked_at?: string | null
+          error_message?: string | null
+          id?: string
+          response_time?: number | null
+          status?: string
+          status_code?: number | null
+          website_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "uptime_checks_website_id_fkey"
+            columns: ["website_id"]
+            isOneToOne: false
+            referencedRelation: "websites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      websites: {
+        Row: {
+          check_interval: number | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          updated_at: string | null
+          url: string
+          user_id: string | null
+        }
+        Insert: {
+          check_interval?: number | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          updated_at?: string | null
+          url: string
+          user_id?: string | null
+        }
+        Update: {
+          check_interval?: number | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          updated_at?: string | null
+          url?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

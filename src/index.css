@@ -8,33 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 13% 9%;
+    --foreground: 220 9% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 12%;
+    --card-foreground: 220 9% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 12%;
+    --popover-foreground: 220 9% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 220 13% 9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 13% 16%;
+    --secondary-foreground: 220 9% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 16%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 13% 16%;
+    --accent-foreground: 220 9% 85%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 16%;
+    --input: 220 13% 16%;
+    --ring: 142 76% 36%;
+
+    /* Uptime monitoring specific colors */
+    --status-up: 142 76% 36%;
+    --status-up-foreground: 0 0% 100%;
+    --status-down: 0 75% 60%;
+    --status-down-foreground: 0 0% 100%;
+    --status-warning: 38 92% 50%;
+    --status-warning-foreground: 0 0% 0%;
+    --status-unknown: 220 9% 46%;
+    --status-unknown-foreground: 0 0% 100%;
+
+    /* Chart colors */
+    --chart-success: 142 76% 36%;
+    --chart-error: 0 75% 60%;
+    --chart-warning: 38 92% 50%;
+    --chart-info: 217 91% 60%;
+
+    /* Gradients */
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+    --gradient-error: linear-gradient(135deg, hsl(0 75% 60%), hsl(0 75% 70%));
+    --gradient-dashboard: linear-gradient(135deg, hsl(220 13% 9%), hsl(220 13% 12%));
 
     --radius: 0.5rem;
 
