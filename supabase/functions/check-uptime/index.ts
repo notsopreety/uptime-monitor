@@ -23,7 +23,13 @@ interface UptimeCheck {
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL") ?? "",
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+  {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false
+    }
+  }
 );
 
 async function checkWebsite(website: Website): Promise<UptimeCheck> {
@@ -86,20 +92,32 @@ async function checkWebsite(website: Website): Promise<UptimeCheck> {
 
 async function performUptimeChecks() {
   try {
+    console.log('Starting uptime checks...');
+    console.log('Supabase URL:', Deno.env.get("SUPABASE_URL"));
+    console.log('Service role key present:', !!Deno.env.get("SUPABASE_SERVICE_ROLE_KEY"));
+    
     // Fetch all active websites
     const { data: websites, error: fetchError } = await supabase
       .from('websites')
       .select('*')
       .eq('is_active', true);
     
+    console.log('Query result - websites:', websites);
+    console.log('Query result - error:', fetchError);
+    
     if (fetchError) {
       console.error('Error fetching websites:', fetchError);
-      return { error: 'Failed to fetch websites' };
+      return { error: 'Failed to fetch websites', details: fetchError };
     }
     
     if (!websites || websites.length === 0) {
       console.log('No active websites to check');
-      return { message: 'No active websites found' };
+      // Let's also try to fetch ALL websites to see if any exist
+      const { data: allWebsites, error: allError } = await supabase
+        .from('websites')
+        .select('*');
+      console.log('All websites check:', allWebsites, allError);
+      return { message: 'No active websites found', allWebsites };
     }
     
     console.log(`Found ${websites.length} websites to check`);
@@ -115,7 +133,7 @@ async function performUptimeChecks() {
     
     if (insertError) {
       console.error('Error inserting check results:', insertError);
-      return { error: 'Failed to save check results' };
+      return { error: 'Failed to save check results', details: insertError };
     }
     
     const summary = {
@@ -130,7 +148,7 @@ async function performUptimeChecks() {
     
   } catch (error) {
     console.error('Unexpected error during uptime checks:', error);
-    return { error: 'Unexpected error occurred' };
+    return { error: 'Unexpected error occurred', details: error };
   }
 }
 

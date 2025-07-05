@@ -112,9 +112,26 @@ const Index = () => {
       })
       .subscribe();
 
+    // Automatic uptime checking every 5 minutes
+    const runAutomaticCheck = async () => {
+      try {
+        await supabase.functions.invoke('check-uptime');
+      } catch (error) {
+        console.error('Automatic check failed:', error);
+      }
+    };
+
+    // Run initial check after 5 seconds
+    const initialCheckTimer = setTimeout(runAutomaticCheck, 5000);
+    
+    // Then run every 5 minutes
+    const automaticCheckInterval = setInterval(runAutomaticCheck, 5 * 60 * 1000);
+
     return () => {
       supabase.removeChannel(websitesChannel);
       supabase.removeChannel(checksChannel);
+      clearTimeout(initialCheckTimer);
+      clearInterval(automaticCheckInterval);
     };
   }, []);
 
