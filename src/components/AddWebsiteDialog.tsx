@@ -61,24 +61,12 @@ export const AddWebsiteDialog = ({ open, onOpenChange, onSuccess }: AddWebsiteDi
   const onSubmit = async (values: FormData) => {
     setLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to add websites",
-          variant: "destructive",
-        });
-        return;
-      }
-
       const { error } = await supabase
         .from('websites')
         .insert({
           name: values.name,
           url: values.url,
           check_interval: values.check_interval,
-          user_id: user.id,
         });
 
       if (error) throw error;
